@@ -44,8 +44,8 @@ const About = () => {
 
             alert(
                 `Your query sent successfully with Ticket No: XX
+                ${response.data.mail}, 
                 our team will contact you`
-                // ${response.data.ticket}, 
             );
             console.log("Mail sent successfully");
         } catch (error) {
