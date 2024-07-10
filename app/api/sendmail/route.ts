@@ -4,7 +4,7 @@ export async function POST(request: Request){
 
     const maildata = await request.json();
 
-    console.log(maildata.to, maildata.subject, maildata.text);
+    console.log( maildata.subject, maildata.text);
 
     const mailTransporter = nodemailer.createTransport({
         host: "smtp.zoho.com",
@@ -33,7 +33,7 @@ export async function POST(request: Request){
             })
         }
 
-        console.log('Mail sent successfully' + info.message);
+        console.log('Mail sent successfully' + info);
     })
 
     return new Response(JSON.stringify({message:`Email sent successfully`}),{
