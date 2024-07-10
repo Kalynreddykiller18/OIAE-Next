@@ -3,7 +3,7 @@ import "./globals.css";
 import Navigation from "./components/navigation";
 import "./components/services.css"
 import "./components/industries.css"
-import "./components/about.css"
+import "./components/About.css"
 
 export const metadata: Metadata = {
   title: "OIAE Systems",
