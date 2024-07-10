@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+.services {
+    /* margin-left: auto;
+    margin-right: auto; */
+    margin: 0 auto;
+    width: 80%;
+    text-align: center;
+}
+
+.services .pre_quote {
+    font-size: 2.06rem;
+    margin-top: 20px;
+    font-family: "Space Grotesk", sans-serif;
+}
+
+.services_s {
+    margin-top: 40px;
+    line-height: 1.8rem;
+}
+
+.services_s_t {
+    font-size: 1.86rem;
+    margin-top: 40px;
+    color: red;
+}
+
+.services_s_p {
+    margin-top: 20px;
+    font-size: 1.3rem;
+    font-weight: 300;
+    font-family: "Nunito", sans-serif;
+}
+
+
+.services li {
+    margin-left: 60px;
+    font-size: 1.3rem;
+    font-weight: 400;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.erp_img {
+    height: 45+0px;
+    width: 100%;
+}
+
+@keyframes scrollanim{
+    0%{
+        /* transform: translateX(-100%); */
+        scale: 0.5;
+        opacity: 0;
+    }
+    100%{
+        /* transform: translateX(0); */
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+.testanim{
+    animation: scrollanim ease 10s ;
+    animation-timeline: view();
+    animation-range: entry 0% cover 30%;
+}
+
+@media (max-width: 700px) {
+    .services {
+        /* margin-left: auto;
+        margin-right: auto; */
+        margin: 0 auto;
+        width: 90%;
+    }
+
+    .services .pre_quote {
+        font-size: 1.72rem;
+    }
+}

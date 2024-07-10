@@ -1,0 +1,159 @@
+.about {
+    padding: 0px 30px;
+}
+
+.about_p {
+    font-size: 1.3rem;
+    font-weight: 100;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.about_card h1 {
+    justify-self: center;
+    align-self: center;
+}
+
+.contact h1 {
+    color: blueviolet;
+}
+
+.contact input {
+    border: 0;
+    margin: 10px;
+    border-radius: 2px;
+    padding: 0 15px;
+}
+
+.contact .ip2 {
+    width: 80%;
+    height: 30px;
+}
+
+.contact .ip1 {
+    width: 36%;
+    height: 30px;
+}
+
+.contact .ip3 {
+    width: 80%;
+    height: 100px;
+    border: 0;
+    margin: 10px;
+    border-radius: 2px;
+    padding: 0 15px;
+}
+
+.contact .ip3:active {
+    border: 1px solid green;
+}
+
+.contact .sub {
+    width: 20%;
+    height: 20px;
+    cursor: pointer;
+    background-color: rgb(121, 31, 91);
+    color: white;
+}
+
+.contact form {
+    min-width: 100%;
+}
+
+.policy,
+.address {
+    display: flex;
+    flex-direction: column;
+    gap: 0.71rem;
+    justify-content: center;
+    align-items: center;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.policy img {
+    width: 100px;
+    fill: cover;
+    background-color: rgb(255, 255, 255);
+}
+
+/* Desktop only */
+@media (min-width: 701px) {
+    .about_card {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        /* box-shadow: 0 0 5px #000; */
+        margin: 10px 0;
+        padding: 5px;
+        column-gap: 15px;
+    }
+
+    .about_card img {
+        width: 80%;
+        place-self: center;
+        grid-area: 1/1 / span 2;
+    }
+    .bottom {
+        display: grid;
+        margin: 2rem 0;
+        grid-template-columns: 2fr 2fr;
+    }
+    .contact {
+        padding: 0 5%;
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+    .about_card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .about_card img {
+        order: 4;
+        margin-top: 0.65rem;
+        width: 100%;
+        /* grid-area: 1/1 / span1; */
+    }
+
+    .about_card p {
+        order: 3;
+    }
+
+    .about_card h1 {
+        order: 2;
+        margin-top: 20px;
+    }
+
+    .contact {
+        padding: 0 10%;
+        width: 80%;
+        box-shadow: 0 0 5px #000;
+        order: 9;
+        margin-top: 15px;
+    }
+
+    .contact .sub {
+        width: 85%;
+    }
+
+    .contact .ip1,
+    .ip2,
+    .ip3 {
+        width: 80%;
+    }
+
+    .policy {
+        margin-top: 1.5rem;
+    }
+
+    .policy a {
+        color: #000;
+    }
+
+    .address {
+        margin-top: 20px;
+    }
+}
