@@ -11,13 +11,13 @@ export async function POST(request: Request){
         port: 465,
         secure: true, // Use SSL
         auth: {
-            user: "accounts@oiaes.com",
-            pass: "8Tutbury@8",
+            user: process.env.USER,
+            pass: process.env.PASSWORD,
         },
     })
 
     const mailOptions = {
-        from:"accounts@oiaes.com",
+        from:process.env.USER,
         to:maildata.to,
         subject:`Customer concern - ${maildata.subject}`,
         text:maildata.text
@@ -43,34 +43,3 @@ export async function POST(request: Request){
         status:200
     })
 }
-
-// app.post("/send-mail", (req, res) => {
-//     const { to, subject, text } = req.body;
-
-//     const mailTransporter = nodemailer.createTransport({
-//         host: "smtp.zoho.com",
-//         port: 465,
-//         secure: true, // Use SSL
-//         auth: {
-//             user: process.env.EMAIL,
-//             pass: process.env.PASSWORD,
-//         },
-//     });
-
-//     const mailOptions = {
-//         from: process.env.EMAIL,
-//         to,
-//         subject,
-//         text,
-//     };
-
-//     mailTransporter.sendMail(mailOptions, (error, info) => {
-//         if (error) {
-//             return res.status(500).send(error.toString());
-//         }
-
-//         console.log("Mail sent successfully");
-
-//         res.status(200).send("Email sent: " + info.response);
-//     });
-// });

@@ -14,7 +14,7 @@ const About = () => {
         e.preventDefault();
 
         const emailInfo = {
-            to: "accounts@oiaes.com",
+            to: process.env.TO,
             subject: companyRef.current?.value,
             text: `FirstName: ${fnameRef.current?.value}  LastName: ${lnameRef.current?.value}
             MailId: ${emailRef.current?.value}         
@@ -33,12 +33,12 @@ const About = () => {
 
         try {
             await axios.post(
-                "http://localhost:3000/api/sendmail",
+                "https://main--oiaes.netlify.app/api/sendmail",
                 emailInfo
             );
 
             const response = await axios.post(
-                "http://localhost:3000/api/query",
+                "https://main--oiaes.netlify.app/api/query",
                 mailDBdata
             );
 
