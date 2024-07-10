@@ -14,7 +14,7 @@ const About = () => {
         e.preventDefault();
 
         const emailInfo = {
-            to: process.env.TO,
+            to: process.env.OWNER,
             subject: companyRef.current?.value,
             text: `FirstName: ${fnameRef.current?.value}  LastName: ${lnameRef.current?.value}
             MailId: ${emailRef.current?.value}         
