@@ -23,7 +23,7 @@ export async function POST(request: Request){
         text:maildata.text
     }
 
-    mailTransporter.sendMail(mailOptions,(error:any ,info)=>{
+    mailTransporter.sendMail(mailOptions,(error:any ,info:any)=>{
         if(error){
             console.log(error.message)
             return new Response(JSON.stringify({Message:"error in mail sending"}),{

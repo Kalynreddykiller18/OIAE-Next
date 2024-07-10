@@ -54,7 +54,7 @@ const About = () => {
             );
             console.error(
                 "Error sending email: ",
-                error.response ? error.response.data : error.message
+               (error as any).response ? (error as any).response.data : (error as Error).message
             );
         } finally {
             if (fnameRef.current) fnameRef.current.value = "";

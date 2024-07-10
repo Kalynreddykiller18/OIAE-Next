@@ -46,8 +46,8 @@ export async function POST(request: Request) {
     };
 
     const client = new MongoClient(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+      // useNewUrlParser: true,
+      // useUnifiedTopology: true,
     });
 
     await client.connect();
