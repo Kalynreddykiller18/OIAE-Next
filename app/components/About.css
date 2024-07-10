@@ -8,6 +8,10 @@
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+h3{
+    color: red;
+}
+
 .about_card h1 {
     justify-self: center;
     align-self: center;
