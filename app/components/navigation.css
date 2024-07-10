@@ -18,7 +18,7 @@ nav {
     align-items: center;
 }
 nav img {
-    width: 200px;
+    max-width: 200px;
     height: 100%;
     object-fit: contain;
 }
@@ -92,6 +92,8 @@ ul#indlist li {
     .mobile {
         display: none;
     }
+
+
     nav ul .desktop {
         display: flex;
         justify-content: space-around;
@@ -135,7 +137,7 @@ ul#indlist li {
 /* Mobile */
 
 @media (max-width: 700px) {
-    a {
+    a:link,a:visited {
         color: white;
     }
 
