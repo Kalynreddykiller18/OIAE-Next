@@ -1,0 +1,71 @@
+@media (min-width: 701px) {
+    .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+}
+
+.footer {
+    background-color: rgb(158, 158, 124);
+    display: grid;
+    height: 3rem;
+    font-size: 1.32rem;
+    place-items: center;
+    grid-template-columns: 2fr 1fr 2fr;
+}
+
+.footer a:visited,
+.footer a:link,
+.footer a:active {
+    color: black;
+}
+
+.footer img {
+    width: 100px;
+    fill: cover;
+    background-color: rgb(255, 255, 255);
+}
+
+.titsec {
+    padding-left: 10px;
+}
+
+.titsec,
+.mail,
+.linkd {
+    display: flex;
+    align-items: center;
+}
+
+.titsec a {
+    border-left: 2px solid black;
+    margin-left: 10px;
+    padding-left: 10px;
+}
+
+.mail p {
+    padding-left: 10px;
+}
+
+.foo_title {
+    font-size: 1.5rem;
+}
+
+.linkd img {
+    padding-right: 10px;
+    width: 26px;
+    background-color: rgb(158, 158, 124);
+}
+
+@media (max-width: 700px) {
+    .footer {
+        display: flex;
+        flex-direction: column;
+        height: 120px;
+        padding: 10px 0;
+        align-content: space-between;
+        justify-content: space-around;
+        margin-top: 1.12rem;
+    }
+}
