@@ -33,12 +33,12 @@ const About = () => {
 
         try {
             await axios.post(
-                "https://main--oiaes.netlify.app/api/sendmail",
+                "https://oiaes.netlify.app/api/sendmail",
                 emailInfo
             );
 
             const response = await axios.post(
-                "https://main--oiaes.netlify.app/api/query",
+                "https://oiaes.netlify.app/api/query",
                 mailDBdata
             );
 

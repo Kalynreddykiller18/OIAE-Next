@@ -17,8 +17,12 @@
 
 import { MongoClient } from 'mongodb';
 
-const uri = 'mongodb+srv://kalyanreddy:AlluArjun12@cluster0.5ubf2ei.mongodb.net/?retryWrites=true&w=majority'; // replace with your MongoDB URI
+const uri = process.env.MONGO_URI as string; // replace with your MongoDB URI
 const dbName = 'test'; // replace with your database name
+
+if (!uri) {
+  throw new Error('Please define the MONGO_URI environment variable inside .env.local');
+}
 
 export async function POST(request: Request) {
   try {
@@ -45,10 +49,7 @@ export async function POST(request: Request) {
       createdAt:new Date()
     };
 
-    const client = new MongoClient(uri, {
-      // useNewUrlParser: true,
-      // useUnifiedTopology: true,
-    });
+    const client = new MongoClient(uri);
 
     await client.connect();
     const db = client.db(dbName);
