@@ -18,7 +18,7 @@ export async function POST(request: Request){
 
     const mailOptions = {
         from:process.env.USER,
-        to:process.env.OWNER,
+        to:"accounts@oiaes.com",
         subject:`Customer concern - ${maildata.subject}`,
         text:maildata.text
     }

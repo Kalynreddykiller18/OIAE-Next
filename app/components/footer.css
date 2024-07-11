@@ -67,5 +67,6 @@
         align-content: space-between;
         justify-content: space-around;
         margin-top: 1.12rem;
+        line-height: 2.36rem;
     }
 }

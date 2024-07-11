@@ -8,12 +8,11 @@
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-h3{
-    color: red;
-}
-
 .about_card h1 {
-    justify-self: center;
+    text-align: center;
+    font-size: 1.76rem;
+    margin-bottom: 10px;
+    color: red;
     align-self: center;
 }
 
@@ -34,7 +33,7 @@ h3{
 }
 
 .contact .ip1 {
-    width: 36%;
+    width: 38%;
     height: 30px;
 }
 
@@ -52,7 +51,7 @@ h3{
 }
 
 .contact .sub {
-    width: 20%;
+    width: 80%;
     height: 20px;
     cursor: pointer;
     background-color: rgb(121, 31, 91);
@@ -133,7 +132,7 @@ h3{
 
     .contact {
         padding: 0 10%;
-        width: 80%;
+        width: 100%;
         box-shadow: 0 0 5px #000;
         order: 9;
         margin-top: 15px;
@@ -144,9 +143,9 @@ h3{
     }
 
     .contact .ip1,
-    .ip2,
-    .ip3 {
-        width: 80%;
+    .contact .ip2,
+    .contact .ip3 {
+        width: 100%;
     }
 
     .policy {
@@ -159,5 +158,6 @@ h3{
 
     .address {
         margin-top: 20px;
+        line-height: 1.1rem;
     }
 }
