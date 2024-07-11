@@ -23,6 +23,8 @@ export async function POST(request: Request){
         text:maildata.text
     }
 
+    console.log(process.env.OWNER)
+
     mailTransporter.sendMail(mailOptions,(error:any ,info:any)=>{
         if(error){
             console.log(error.message)
