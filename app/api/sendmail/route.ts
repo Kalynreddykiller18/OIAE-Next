@@ -11,13 +11,13 @@ export async function POST(request: Request){
         port: 465,
         secure: true, // Use SSL
         auth: {
-            user: process.env.NEXT_PUBLIC_USER,
-            pass: process.env.NEXT_PUBLIC_PASSWORD,
+            user: process.env.USER,
+            pass: process.env.PASSWORD,
         },
     })
 
     const mailOptions = {
-        from:process.env.NEXT_PUBLIC_USER,
+        from:process.env.USER,
         to:"accounts@oiaes.com",
         subject:`Customer concern - ${maildata.subject}`,
         text:maildata.text
