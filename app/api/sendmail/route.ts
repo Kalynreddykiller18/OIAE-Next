@@ -1,67 +1,47 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { MongoClient } from 'mongodb';
+const nodemailer = require('nodemailer');
 
-// CORS handler function
-const handleCors = (req: NextApiRequest, res: NextApiResponse) => {
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Access-Control-Allow-Origin', '*'); // Replace '*' with the specific origin if needed
-  res.status(200).end();
-};
+export async function POST(request: Request){
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method === 'OPTIONS') {
-    handleCors(req, res);
-    return;
-  }
+    const maildata = await request.json();
 
-  if (req.method !== 'POST') {
-    res.setHeader('Access-Control-Allow-Origin', '*'); // Replace '*' with the specific origin if needed
-    res.status(405).json({ message: 'Method not allowed' });
-    return;
-  }
+    console.log( maildata.subject, maildata.text);
 
-  const { firstname, lastname, company, email, message } = req.body;
+    const mailTransporter = nodemailer.createTransport({
+        host: "smtp.zoho.com",
+        port: 465,
+        secure: true, // Use SSL
+        auth: {
+            user: process.env.USER,
+            pass: process.env.PASSWORD,
+        },
+    })
 
-  // Validate the input data
-  if (!firstname || !lastname || !company || !email || !message) {
-    res.setHeader('Access-Control-Allow-Origin', '*'); // Replace '*' with the specific origin if needed
-    res.status(400).json({ error: 'Invalid input data' });
-    return;
-  }
+    const mailOptions = {
+        from:process.env.USER,
+        to:"accounts@oiaes.com",
+        subject:`Customer concern - ${maildata.subject}`,
+        text:maildata.text
+    }
 
-  const newQuerie = {
-    firstname,
-    lastname,
-    company,
-    email,
-    message,
-    createdAt: new Date(),
-  };
+    console.log(process.env.OWNER)
 
-  const uri = process.env.MONGO_URI as string; // replace with your MongoDB URI
-  const dbName = 'test'; // replace with your database name
+    mailTransporter.sendMail(mailOptions,(error:any ,info:any)=>{
+        if(error){
+            console.log(error.message)
+            return new Response(JSON.stringify({Message:"error in mail sending"}),{
+                headers:{
+                    "Content-Type":"application/json"
+                },
+            })
+        }
 
-  if (!uri) {
-    throw new Error('Please define the MONGO_URI environment variable inside .env.local');
-  }
+        console.log('Mail sent successfully' + info);
+    })
 
-  const client = new MongoClient(uri);
-
-  try {
-    await client.connect();
-    const db = client.db(dbName);
-    await db.collection('queries').insertOne(newQuerie);
-    await client.close();
-
-    res.setHeader('Access-Control-Allow-Origin', '*'); // Replace '*' with the specific origin if needed
-    res.status(201).json(newQuerie);
-  } catch (error) {
-    console.error('Error inserting data:', error);
-
-    res.setHeader('Access-Control-Allow-Origin', '*'); // Replace '*' with the specific origin if needed
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-};
-
-export default handler;
+    return new Response(JSON.stringify({message:`Email sent successfully`}),{
+        headers:{
+            "Content-Type":"application/json"
+        },
+        status:200
+    })
+}
