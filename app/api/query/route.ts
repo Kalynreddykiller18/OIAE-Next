@@ -1,19 +1,4 @@
-// export async function GET(){
-//     return Response.json({"kill":"hii"});
-// }
 
-// const generateTicket = async (length: number) => {
-//     const min = Math.pow(10, length - 1);
-//     const max = Math.pow(10, length) - 1;
-
-//     const t = Math.floor(Math.random() * (max - min + 1)) + min;
-//     const c = await Querie.findOne({ ticket: t }, {});
-
-//     if (c == null) return t;
-//     return generateTicket(length);
-// };
-
-// pages/api/submitData.ts
 
 import { MongoClient } from 'mongodb';
 
