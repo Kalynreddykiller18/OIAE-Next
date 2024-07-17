@@ -43,7 +43,10 @@ export async function POST(request: Request){
             console.log(error.message)
             return new Response(JSON.stringify({Message:"error in mail sending"}),{
                 headers:{
-                    "Content-Type":"application/json"
+                    "Content-Type":"application/json",
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
                 },
             })
         }
@@ -53,7 +56,10 @@ export async function POST(request: Request){
 
     return new Response(JSON.stringify({message:`Email sent successfully`}),{
         headers:{
-            "Content-Type":"application/json"
+            "Content-Type":"application/json",
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
         },
         status:200
     })
