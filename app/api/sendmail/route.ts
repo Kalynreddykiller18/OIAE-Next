@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 
-export const dynamic = 'force-dynamic' // defaults to auto
- 
+export const dynamic = 'force-dynamic'; // defaults to auto
+
 export async function GET(request: Request) {
   return new Response('Hello, Next.js!', {
     status: 200,
@@ -10,57 +10,67 @@ export async function GET(request: Request) {
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     },
-  })
+  });
 }
 
-export async function POST(request: Request){
+export async function POST(request: Request) {
+  const maildata = await request.json();
 
-    const maildata = await request.json();
+  console.log(maildata.subject, maildata.text);
 
-    console.log( maildata.subject, maildata.text);
+  const mailTransporter = nodemailer.createTransport({
+    host: "smtp.zoho.com",
+    port: 465,
+    secure: true, // Use SSL
+    auth: {
+      user: process.env.USER,
+      pass: process.env.PASSWORD,
+    },
+  });
 
-    const mailTransporter = nodemailer.createTransport({
-        host: "smtp.zoho.com",
-        port: 465,
-        secure: true, // Use SSL
-        auth: {
-            user: process.env.USER,
-            pass: process.env.PASSWORD,
-        },
-    })
+  const mailOptions = {
+    from: process.env.USER,
+    to: "accounts@oiaes.com",
+    subject: `Customer concern - ${maildata.subject}`,
+    text: maildata.text,
+  };
 
-    const mailOptions = {
-        from:process.env.USER,
-        to:"accounts@oiaes.com",
-        subject:`Customer concern - ${maildata.subject}`,
-        text:maildata.text
-    }
+  console.log(process.env.OWNER);
 
-    console.log(process.env.OWNER)
+  try {
+    const info = await mailTransporter.sendMail(mailOptions);
+    console.log('Mail sent successfully', info);
 
-    mailTransporter.sendMail(mailOptions,(error:any ,info:any)=>{
-        if(error){
-            console.log(error.message)
-            return new Response(JSON.stringify({Message:"error in mail sending"}),{
-                headers:{
-                    "Content-Type":"application/json",
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-                    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-                },
-            })
-        }
+    return new Response(JSON.stringify({ message: 'Email sent successfully' }), {
+      headers: {
+        "Content-Type": "application/json",
+        'Access-Control-Allow-Origin': 'https://oiaes.com',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      },
+      status: 200,
+    });
+  } catch (error : any) {
+    console.error(error.message);
 
-        console.log('Mail sent successfully' + info);
-    })
+    return new Response(JSON.stringify({ message: 'Error in mail sending' }), {
+      headers: {
+        "Content-Type": "application/json",
+        'Access-Control-Allow-Origin': 'https://oiaes.com',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      },
+      status: 500,
+    });
+  }
+}
 
-    return new Response(JSON.stringify({message:`Email sent successfully`}),{
-        headers:{
-            "Content-Type":"application/json",
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        },
-        status:200
-    })
+export async function OPTIONS(request: Request) {
+  return new Response(null, {
+    headers: {
+      'Access-Control-Allow-Origin': 'https://oiaes.com',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    },
+  });
 }

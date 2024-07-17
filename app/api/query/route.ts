@@ -38,19 +38,36 @@ export async function POST(request: Request) {
       });
     }
 
+    const client = new MongoClient(uri);
+
+    await client.connect();
+    const db = client.db(dbName);
+
+
+    const generateTicket = async (length: number) => {
+      const min = Math.pow(10, length - 1);
+      const max = Math.pow(10, length) - 1;
+  
+      const t = Math.floor(Math.random() * (max - min + 1)) + min;
+      const c = await db.collection('queries').findOne({ ticket: t }, {});
+  
+      if (c == null) return t;
+      return generateTicket(length);
+    };
+
+    const ticket = await generateTicket(6);
+
     const newQuerie = {
       firstname: userQuerie.firstname,
       lastname: userQuerie.lastname,
       company: userQuerie.company,
       email: userQuerie.email,
       message: userQuerie.message,
+      ticket:ticket,
       createdAt:new Date()
     };
 
-    const client = new MongoClient(uri);
-
-    await client.connect();
-    const db = client.db(dbName);
+    
 
     const result = await db.collection('queries').insertOne(newQuerie);
 
@@ -58,7 +75,10 @@ export async function POST(request: Request) {
 
     return new Response(JSON.stringify(newQuerie), {
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        'Access-Control-Allow-Origin': 'https://oiaes.com',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
       },
       status: 201
     });
@@ -67,9 +87,22 @@ export async function POST(request: Request) {
 
     return new Response(JSON.stringify({ error: 'Internal Server Error' }), {
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        'Access-Control-Allow-Origin': 'https://oiaes.com',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
       },
       status: 500
     });
   }
+}
+
+export async function OPTIONS(request: Request) {
+  return new Response(null, {
+    headers: {
+      'Access-Control-Allow-Origin': 'https://oiaes.com',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    },
+  });
 }
