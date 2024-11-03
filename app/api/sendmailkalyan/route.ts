@@ -46,7 +46,7 @@ export async function POST(request: Request) {
     return new Response(JSON.stringify({ message: 'Email sent successfully' }), {
       headers: {
         "Content-Type": "application/json",
-        'Access-Control-Allow-Origin': 'http://127.0.0.1:5500',
+        'Access-Control-Allow-Origin': 'https://kalyanreddybejjanki.netlify.app/',
         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
       },
@@ -58,7 +58,7 @@ export async function POST(request: Request) {
     return new Response(JSON.stringify({ message: 'Error in mail sending' }), {
       headers: {
         "Content-Type": "application/json",
-        'Access-Control-Allow-Origin': 'https://oiaes.com',
+        'Access-Control-Allow-Origin': 'https://kalyanreddybejjanki.netlify.app/',
         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
       },
